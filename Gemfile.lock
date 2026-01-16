@@ -2,6 +2,8 @@ PATH
   remote: .
   specs:
     rubocop-spec_parity (0.1.0)
+      lint_roller (~> 1.1)
+      rubocop (>= 1.72.0)
 
 GEM
   remote: https://rubygems.org/
