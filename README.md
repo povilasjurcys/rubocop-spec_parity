@@ -10,6 +10,17 @@ This plugin provides three custom cops:
 - **SpecParity/PublicMethodHasSpec**: Ensures every public method has spec test coverage
 - **SpecParity/NoLetBang**: Disallows the use of `let!` in specs, encouraging explicit setup
 
+## Assumptions
+
+These cops work based on the following conventions:
+
+- **File organization**: Each Ruby file has a corresponding spec file stored in the `spec/` directory, mirroring the same directory structure. For example, `app/models/user.rb` should have a spec at `spec/models/user_spec.rb`.
+- **Spec file naming**: Spec files use the `_spec.rb` suffix.
+- **Instance method specs**: Instance methods are tested using the convention `describe '#method_name' do`.
+- **Class method specs**: Class methods are tested using the convention `describe '.class_method' do`.
+
+If your project uses different conventions, these cops may not work as expected.
+
 ## Installation
 
 Add this line to your application's Gemfile:
