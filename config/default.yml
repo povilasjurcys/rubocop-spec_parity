@@ -1,6 +1,6 @@
-# Default configuration for rubocop-test-coverage
+# Default configuration for rubocop-spec_parity
 
-TestCoverage/FileHasSpec:
+SpecParity/FileHasSpec:
   Description: 'Checks that each Ruby file in the app directory has a corresponding spec file.'
   Enabled: true
   Include:
@@ -10,7 +10,7 @@ TestCoverage/FileHasSpec:
     - 'app/views/**/*'
     - 'app/javascript/**/*'
 
-TestCoverage/PublicMethodHasSpec:
+SpecParity/PublicMethodHasSpec:
   Description: 'Checks that each public method has a corresponding spec test.'
   Enabled: true
   Include:
@@ -20,7 +20,7 @@ TestCoverage/PublicMethodHasSpec:
     - 'app/views/**/*'
     - 'app/javascript/**/*'
 
-RSpec/NoLetBang:
+SpecParity/NoLetBang:
   Description: 'Disallows the use of `let!` in specs.'
   Enabled: true
   Include:
