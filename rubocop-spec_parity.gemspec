@@ -8,16 +8,15 @@ Gem::Specification.new do |spec|
   spec.authors = ["Povilas Jurcys"]
   spec.email = ["po.jurcys@gmail.com"]
 
-  spec.summary = "TODO: Write a short summary, because RubyGems requires one."
-  spec.description = "TODO: Write a longer description or delete this line."
-  spec.homepage = "TODO: Put your gem's website or public repo URL here."
+  spec.summary = "RuboCop plugin for enforcing spec parity and RSpec best practices"
+  spec.description = "A RuboCop plugin that provides custom cops to ensure test coverage parity and enforce RSpec best practices in your Ruby projects."
+  spec.homepage = "https://github.com/povilasjurcys/rubocop-spec_parity"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 3.2.0"
 
-  spec.metadata["allowed_push_host"] = "TODO: Set to your gem server 'https://example.com'"
   spec.metadata["homepage_uri"] = spec.homepage
-  spec.metadata["source_code_uri"] = "TODO: Put your gem's public repo URL here."
-  spec.metadata["changelog_uri"] = "TODO: Put your gem's CHANGELOG.md URL here."
+  spec.metadata["source_code_uri"] = "https://github.com/povilasjurcys/rubocop-spec_parity"
+  spec.metadata["changelog_uri"] = "https://github.com/povilasjurcys/rubocop-spec_parity/blob/main/CHANGELOG.md"
   spec.metadata["rubygems_mfa_required"] = "true"
   spec.metadata["default_lint_roller_plugin"] = "Rubocop::SpecParity::Plugin"
 
