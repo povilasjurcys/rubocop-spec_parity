@@ -10,7 +10,7 @@ module RuboCop
         LintRoller::About.new(
           name: "rubocop-rspec_parity",
           version: VERSION,
-          homepage: "https://github.com/example/rubocop-rspec_parity",
+          homepage: "https://github.com/povilasjurcys/rubocop-rspec_parity",
           description: "RuboCop cops for RSpec parity checks"
         )
       end

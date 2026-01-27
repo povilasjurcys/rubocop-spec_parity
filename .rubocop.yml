@@ -8,6 +8,10 @@ Metrics/BlockLength:
     - "spec/**/*_spec.rb"
     - "**/*.gemspec"
 
+Naming/FileName:
+  Exclude:
+    - "lib/rubocop-rspec_parity.rb"
+
 Style/StringLiterals:
   EnforcedStyle: double_quotes
 
