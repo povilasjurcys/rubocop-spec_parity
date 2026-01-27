@@ -58,6 +58,11 @@ module RuboCop
           /^autosave_/
         ].freeze
 
+        def initialize(config = nil, options = nil)
+          super
+          @ignore_memoization = cop_config.fetch("IgnoreMemoization", true)
+        end
+
         def on_def(node)
           check_method(node)
         end
@@ -126,20 +131,27 @@ module RuboCop
 
         def count_branches(node)
           branches = 0
-          elsif_nodes = Set.new
+          elsif_nodes = collect_elsif_nodes(node)
 
-          # First pass: collect all elsif nodes (if nodes in else branches)
-          node.each_descendant(:if) do |if_node|
-            elsif_nodes.add(if_node.else_branch) if if_node.else_branch&.if_type?
-          end
-
-          # Second pass: count branches, skipping elsif nodes
           node.each_descendant do |descendant|
             next if elsif_nodes.include?(descendant)
+            next if should_skip_node?(descendant)
 
             branches += branch_count_for_node(descendant)
           end
           branches
+        end
+
+        def collect_elsif_nodes(node)
+          elsif_nodes = Set.new
+          node.each_descendant(:if) do |if_node|
+            elsif_nodes.add(if_node.else_branch) if if_node.else_branch&.if_type?
+          end
+          elsif_nodes
+        end
+
+        def should_skip_node?(node)
+          @ignore_memoization && memoization_pattern?(node)
         end
 
         def branch_count_for_node(node)
@@ -147,9 +159,14 @@ module RuboCop
           when :if then count_if_branches(node)
           when :case then count_case_branches(node)
           when :and, :or then 1
-          when :send then node.method?(:&) || node.method?(:|) ? 1 : 0
+          when :or_asgn, :and_asgn then 2 # ||= and &&= create 2 branches (set vs already set)
+          when :send then send_node_branch_count(node)
           else 0
           end
+        end
+
+        def send_node_branch_count(node)
+          node.method?(:&) || node.method?(:|) ? 1 : 0
         end
 
         def count_if_branches(node)
@@ -248,6 +265,81 @@ module RuboCop
           when "context" then "contexts"
           else "#{word}s"
           end
+        end
+
+        def memoization_pattern?(node)
+          # Pattern: @var ||= value
+          return true if or_asgn_ivar_pattern?(node)
+
+          # Pattern: return @var if defined?(@var)
+          return true if defined_check_pattern?(node)
+
+          # Pattern: @var = value if @var.nil? or similar
+          return true if nil_check_pattern?(node)
+
+          # Pattern: || with instance variable (part of @var ||= which creates both :or and :or_asgn nodes)
+          return true if or_with_ivar_pattern?(node)
+
+          false
+        end
+
+        # @var ||= value
+        def or_asgn_ivar_pattern?(node)
+          node.or_asgn_type? && node.children[0]&.ivasgn_type?
+        end
+
+        # return @var if defined?(@var)
+        def defined_check_pattern?(node)
+          return false unless node.if_type?
+
+          condition = node.condition
+          return false unless condition&.defined_type?
+
+          # Check if it's checking an instance variable
+          condition.children[0]&.ivar_type?
+        end
+
+        # @var = value if @var.nil? or @var = value unless @var
+        def nil_check_pattern?(node)
+          return false unless node.if_type?
+
+          condition = node.condition
+          body = node.body
+
+          # Check if body is an ivasgn
+          return false unless body&.ivasgn_type?
+
+          ivar_name = body.children[0]
+
+          # Check if condition checks the same ivar for nil
+          checks_same_ivar_for_nil?(condition, ivar_name)
+        end
+
+        def checks_same_ivar_for_nil?(condition, ivar_name)
+          return false unless condition
+
+          nil_check?(condition, ivar_name) || negation_check?(condition, ivar_name)
+        end
+
+        def nil_check?(condition, ivar_name)
+          return false unless condition.send_type? && condition.method?(:nil?)
+
+          condition.receiver&.ivar_type? && condition.receiver.children[0] == ivar_name
+        end
+
+        def negation_check?(condition, ivar_name)
+          return false unless condition.send_type? && condition.method?(:!)
+
+          receiver = condition.receiver
+          receiver&.ivar_type? && receiver.children[0] == ivar_name
+        end
+
+        # || operator with instance variable on left side
+        def or_with_ivar_pattern?(node)
+          return false unless node.or_type?
+
+          left = node.children[0]
+          left&.ivar_type?
         end
       end
     end

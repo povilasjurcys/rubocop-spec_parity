@@ -268,6 +268,88 @@ RSpec.describe RuboCop::Cop::RSpecParity::SufficientContexts do
     end
   end
 
+  describe "memoization patterns" do
+    let(:spec_exists) { true }
+    let(:spec_content) do
+      <<~RUBY
+        RSpec.describe UserCreator do
+          describe '#cached_value' do
+            it 'returns cached value' do
+            end
+          end
+        end
+      RUBY
+    end
+
+    context "with IgnoreMemoization enabled (default)" do
+      it "does not count @var ||= as a branch" do
+        expect_no_offenses(<<~RUBY, source_path)
+          def cached_value
+            @cached_value ||= expensive_operation
+          end
+        RUBY
+      end
+
+      it "does not count return @var if defined?(@var) as a branch" do
+        expect_no_offenses(<<~RUBY, source_path)
+          def cached_value
+            return @cached_value if defined?(@cached_value)
+            @cached_value = expensive_operation
+          end
+        RUBY
+      end
+
+      it "does not count @var = value if @var.nil? as a branch" do
+        expect_no_offenses(<<~RUBY, source_path)
+          def cached_value
+            @cached_value = expensive_operation if @cached_value.nil?
+            @cached_value
+          end
+        RUBY
+      end
+
+      it "still counts regular branches" do
+        expect_offense(<<~RUBY, source_path)
+          def cached_value
+          ^^^^^^^^^^^^^^^^ RSpecParity/SufficientContexts: Method `cached_value` has 2 branches but only 1 context in spec. Add 1 more context to cover all branches.
+            @cached_value ||= if some_condition
+              value_a
+            else
+              value_b
+            end
+          end
+        RUBY
+      end
+    end
+
+    context "with IgnoreMemoization disabled" do
+      subject(:cop) { described_class.new(config) }
+
+      let(:config) do
+        RuboCop::Config.new("RSpecParity/SufficientContexts" => { "IgnoreMemoization" => false })
+      end
+
+      it "counts @var ||= as a branch" do
+        expect_offense(<<~RUBY, source_path)
+          def cached_value
+          ^^^^^^^^^^^^^^^^ Method `cached_value` has 2 branches but only 1 context in spec. Add 1 more context to cover all branches.
+            @cached_value ||= expensive_operation
+          end
+        RUBY
+      end
+
+      it "counts return @var if defined?(@var) as a branch" do
+        expect_offense(<<~RUBY, source_path)
+          def cached_value
+          ^^^^^^^^^^^^^^^^ Method `cached_value` has 2 branches but only 1 context in spec. Add 1 more context to cover all branches.
+            return @cached_value if defined?(@cached_value)
+            @cached_value = expensive_operation
+          end
+        RUBY
+      end
+    end
+  end
+
   describe "file path filtering" do
     let(:spec_exists) { true }
 

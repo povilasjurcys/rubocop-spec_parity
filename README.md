@@ -96,7 +96,21 @@ RSpec.describe UserCreator do
     end
   end
 end
+
+# Memoization patterns are ignored by default
+def cached_value
+  @cached_value ||= expensive_operation  # Not counted as a branch
+end
+
+def cached_value
+  return @cached_value if defined?(@cached_value)  # Not counted as a branch
+  @cached_value = expensive_operation
+end
 ```
+
+**Configuration options:**
+
+- `IgnoreMemoization` (default: `true`) - When enabled, common memoization patterns like `@var ||=` and `return @var if defined?(@var)` are not counted as branches. Set to `false` if you want to count these as branches.
 
 ### RSpecParity/NoLetBang
 
@@ -198,6 +212,7 @@ RSpecParity/PublicMethodHasSpec:
 
 RSpecParity/SufficientContexts:
   Enabled: true
+  IgnoreMemoization: true  # Set to false to count memoization patterns as branches
   Include:
     - 'app/**/*.rb'
   Exclude:
