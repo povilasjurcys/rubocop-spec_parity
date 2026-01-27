@@ -2,7 +2,7 @@
 
 module RuboCop
   module Cop
-    module SpecParity
+    module RSpecParity
       # Disallows the use of `let!` in specs.
       #
       # `let!` creates implicit setup that runs before each example,

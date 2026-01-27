@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "rubocop_spec_parity"
+require "rubocop_rspec_parity"
 require "rubocop/rspec/support"
 
 # Override _investigate to use Commissioner instead of Team

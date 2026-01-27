@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe RuboCop::Cop::SpecParity::PublicMethodHasSpec, :config do
+RSpec.describe RuboCop::Cop::RSpecParity::PublicMethodHasSpec, :config do
   let(:spec_path) { "/project/spec/models/user_spec.rb" }
   let(:source_path) { "/project/app/models/user.rb" }
 

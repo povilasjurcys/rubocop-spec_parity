@@ -1,4 +1,4 @@
-# Claude Instructions for rubocop-spec_parity
+# Claude Instructions for rubocop-rspec_parity
 
 ## Code Quality Rules
 
@@ -22,7 +22,7 @@
 
 ## Project Structure
 
-- `lib/rubocop_spec_parity.rb` - Main entry point
-- `lib/rubocop/cop/spec_parity/` - Custom RuboCop cops
+- `lib/rubocop_rspec_parity.rb` - Main entry point
+- `lib/rubocop/cop/spec_rparity/` - Custom RuboCop cops
 - `config/default.yml` - Default cop configuration
 - `spec/` - RSpec tests

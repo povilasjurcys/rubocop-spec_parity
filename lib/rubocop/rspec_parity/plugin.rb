@@ -3,15 +3,15 @@
 require "lint_roller"
 
 module Rubocop
-  module SpecParity
+  module RSpecParity
     # LintRoller plugin for RuboCop integration (RuboCop >= 1.72)
     class Plugin < LintRoller::Plugin
       def about
         LintRoller::About.new(
-          name: "rubocop-spec_parity",
+          name: "rubocop-rspec_parity",
           version: VERSION,
-          homepage: "https://github.com/example/rubocop-spec_parity",
-          description: "RuboCop cops for spec parity checks"
+          homepage: "https://github.com/example/rubocop-rspec_parity",
+          description: "RuboCop cops for RSpec parity checks"
         )
       end
 

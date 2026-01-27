@@ -1,25 +1,25 @@
 # frozen_string_literal: true
 
-require_relative "lib/rubocop/spec_parity/version"
+require_relative "lib/rubocop/rspec_parity/version"
 
 Gem::Specification.new do |spec|
-  spec.name = "rubocop-spec_parity"
-  spec.version = Rubocop::SpecParity::VERSION
+  spec.name = "rubocop-rspec_parity"
+  spec.version = Rubocop::RSpecParity::VERSION
   spec.authors = ["Povilas Jurcys"]
   spec.email = ["po.jurcys@gmail.com"]
 
-  spec.summary = "RuboCop plugin for enforcing spec parity and RSpec best practices"
-  spec.description = "A RuboCop plugin that provides custom cops to ensure test coverage parity and " \
+  spec.summary = "RuboCop plugin for enforcing RSpec spec parity and best practices"
+  spec.description = "A RuboCop plugin that provides custom cops to ensure RSpec test coverage parity and " \
                      "enforce RSpec best practices in your Ruby projects."
-  spec.homepage = "https://github.com/povilasjurcys/rubocop-spec_parity"
+  spec.homepage = "https://github.com/povilasjurcys/rubocop-rspec_parity"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 3.2.0"
 
   spec.metadata["homepage_uri"] = spec.homepage
-  spec.metadata["source_code_uri"] = "https://github.com/povilasjurcys/rubocop-spec_parity"
-  spec.metadata["changelog_uri"] = "https://github.com/povilasjurcys/rubocop-spec_parity/blob/main/CHANGELOG.md"
+  spec.metadata["source_code_uri"] = "https://github.com/povilasjurcys/rubocop-rspec_parity"
+  spec.metadata["changelog_uri"] = "https://github.com/povilasjurcys/rubocop-rspec_parity/blob/main/CHANGELOG.md"
   spec.metadata["rubygems_mfa_required"] = "true"
-  spec.metadata["default_lint_roller_plugin"] = "Rubocop::SpecParity::Plugin"
+  spec.metadata["default_lint_roller_plugin"] = "Rubocop::RSpecParity::Plugin"
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.

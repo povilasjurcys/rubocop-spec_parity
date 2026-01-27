@@ -2,7 +2,7 @@
 
 source "https://rubygems.org"
 
-# Specify your gem's dependencies in rubocop-spec_parity.gemspec
+# Specify your gem's dependencies in rubocop-rspec_parity.gemspec
 gemspec
 
 gem "irb"

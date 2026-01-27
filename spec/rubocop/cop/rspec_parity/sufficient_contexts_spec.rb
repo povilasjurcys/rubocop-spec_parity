@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe RuboCop::Cop::SpecParity::SufficientContexts do
+RSpec.describe RuboCop::Cop::RSpecParity::SufficientContexts do
   subject(:cop) { described_class.new }
 
   let(:spec_path) { "spec/services/user_creator_spec.rb" }
@@ -47,7 +47,7 @@ RSpec.describe RuboCop::Cop::SpecParity::SufficientContexts do
         it "registers an offense" do
           expect_offense(<<~RUBY, source_path)
             def create_user(params)
-            ^^^^^^^^^^^^^^^^^^^^^^^ SpecParity/SufficientContexts: Method `create_user` has 2 branches but only 1 context in spec. Add 1 more context to cover all branches.
+            ^^^^^^^^^^^^^^^^^^^^^^^ RSpecParity/SufficientContexts: Method `create_user` has 2 branches but only 1 context in spec. Add 1 more context to cover all branches.
               if params[:admin]
                 create_admin
               else

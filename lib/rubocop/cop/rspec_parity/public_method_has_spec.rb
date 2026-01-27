@@ -2,7 +2,7 @@
 
 module RuboCop
   module Cop
-    module SpecParity
+    module RSpecParity
       # Checks that each public method in a class has a corresponding spec test.
       #
       # @example

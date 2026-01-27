@@ -2,7 +2,7 @@
 
 module RuboCop
   module Cop
-    module SpecParity
+    module RSpecParity
       # Ensures that specs have at least as many contexts as the method has branches.
       #
       # This cop helps ensure thorough test coverage by checking that complex methods

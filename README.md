@@ -1,4 +1,4 @@
-# RuboCop SpecParity
+# RuboCop RSpecParity
 
 A RuboCop plugin that enforces spec parity and best practices in RSpec test suites. This gem helps ensure your Ruby code has proper test coverage and follows RSpec conventions.
 
@@ -6,14 +6,14 @@ A RuboCop plugin that enforces spec parity and best practices in RSpec test suit
 
 This plugin provides these custom cops:
 
-- **SpecParity/FileHasSpec**: Ensures every Ruby file in your app directory has a corresponding spec file
-- **SpecParity/PublicMethodHasSpec**: Ensures every public method has spec test coverage
-- **SpecParity/SufficientContexts**: Ensures specs have at least as many contexts as the method has branches (if/elsif/else, case/when, &&, ||, ternary operators)
-- **SpecParity/NoLetBang**: Disallows the use of `let!` in specs, encouraging explicit setup
+- **RSpecParity/FileHasSpec**: Ensures every Ruby file in your app directory has a corresponding spec file
+- **RSpecParity/PublicMethodHasSpec**: Ensures every public method has spec test coverage
+- **RSpecParity/SufficientContexts**: Ensures specs have at least as many contexts as the method has branches (if/elsif/else, case/when, &&, ||, ternary operators)
+- **RSpecParity/NoLetBang**: Disallows the use of `let!` in specs, encouraging explicit setup
 
 ## Examples
 
-### SpecParity/FileHasSpec
+### RSpecParity/FileHasSpec
 
 Ensures every Ruby file in your app directory has a corresponding spec file.
 
@@ -26,7 +26,7 @@ Ensures every Ruby file in your app directory has a corresponding spec file.
 # spec/models/user_spec.rb
 ```
 
-### SpecParity/PublicMethodHasSpec
+### RSpecParity/PublicMethodHasSpec
 
 Ensures every public method has spec test coverage.
 
@@ -55,7 +55,7 @@ RSpec.describe UserCreator do
 end
 ```
 
-### SpecParity/SufficientContexts
+### RSpecParity/SufficientContexts
 
 Ensures specs have at least as many contexts as the method has branches.
 
@@ -98,7 +98,7 @@ RSpec.describe UserCreator do
 end
 ```
 
-### SpecParity/NoLetBang
+### RSpecParity/NoLetBang
 
 Disallows the use of `let!` in specs, encouraging explicit setup.
 
@@ -152,7 +152,7 @@ If your project uses different conventions, these cops may not work as expected.
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'rubocop-spec_parity', require: false
+gem 'rubocop-rspec_parity', require: false
 ```
 
 And then execute:
@@ -164,26 +164,26 @@ bundle install
 Or install it directly:
 
 ```bash
-gem install rubocop-spec_parity
+gem install rubocop-rspec_parity
 ```
 
 ## Usage
 
-Add `rubocop-spec_parity` to your `.rubocop.yml`:
+Add `rubocop-rspec_parity` to your `.rubocop.yml`:
 
 ```yaml
 require:
-  - rubocop-spec_parity
+  - rubocop-rspec_parity
 
 # For RuboCop >= 1.72
 plugins:
-  - rubocop-spec_parity
+  - rubocop-rspec_parity
 ```
 
 The default configuration enables all cops. You can customize them in your `.rubocop.yml`:
 
 ```yaml
-SpecParity/FileHasSpec:
+RSpecParity/FileHasSpec:
   Enabled: true
   Include:
     - 'app/**/*.rb'
@@ -191,12 +191,12 @@ SpecParity/FileHasSpec:
     - 'app/assets/**/*'
     - 'app/views/**/*'
 
-SpecParity/PublicMethodHasSpec:
+RSpecParity/PublicMethodHasSpec:
   Enabled: true
   Include:
     - 'app/**/*.rb'
 
-SpecParity/SufficientContexts:
+RSpecParity/SufficientContexts:
   Enabled: true
   Include:
     - 'app/**/*.rb'
@@ -204,7 +204,7 @@ SpecParity/SufficientContexts:
     - 'app/assets/**/*'
     - 'app/views/**/*'
 
-SpecParity/NoLetBang:
+RSpecParity/NoLetBang:
   Enabled: true
   Include:
     - 'spec/**/*_spec.rb'
@@ -224,7 +224,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/povilasjurcys/rubocop-spec_parity. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/povilasjurcys/rubocop-spec_parity/blob/main/CODE_OF_CONDUCT.md).
+Bug reports and pull requests are welcome on GitHub at https://github.com/povilasjurcys/rubocop-rspec_parity. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/povilasjurcys/rubocop-rspec_parity/blob/main/CODE_OF_CONDUCT.md).
 
 ## License
 
@@ -232,4 +232,4 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Code of Conduct
 
-Everyone interacting in the RuboCop SpecParity project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/povilasjurcys/rubocop-spec_parity/blob/main/CODE_OF_CONDUCT.md).
+Everyone interacting in the RuboCop RSpecParity project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/povilasjurcys/rubocop-rspec_parity/blob/main/CODE_OF_CONDUCT.md).

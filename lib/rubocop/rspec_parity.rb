@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-require_relative "spec_parity/version"
+require_relative "rspec_parity/version"
 
 module Rubocop
-  module SpecParity
+  module RSpecParity
     class Error < StandardError; end
   end
 end

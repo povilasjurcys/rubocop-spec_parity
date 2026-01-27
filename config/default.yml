@@ -1,6 +1,6 @@
-# Default configuration for rubocop-spec_parity
+# Default configuration for rubocop-rspec_parity
 
-SpecParity/FileHasSpec:
+RSpecParity/FileHasSpec:
   Description: 'Checks that each Ruby file in the app directory has a corresponding spec file.'
   Enabled: true
   Include:
@@ -10,7 +10,7 @@ SpecParity/FileHasSpec:
     - 'app/views/**/*'
     - 'app/javascript/**/*'
 
-SpecParity/PublicMethodHasSpec:
+RSpecParity/PublicMethodHasSpec:
   Description: 'Checks that each public method has a corresponding spec test.'
   Enabled: true
   Include:
@@ -20,7 +20,7 @@ SpecParity/PublicMethodHasSpec:
     - 'app/views/**/*'
     - 'app/javascript/**/*'
 
-SpecParity/SufficientContexts:
+RSpecParity/SufficientContexts:
   Description: 'Ensures specs have at least as many contexts as the method has branches.'
   Enabled: true
   Include:
@@ -30,7 +30,7 @@ SpecParity/SufficientContexts:
     - 'app/views/**/*'
     - 'app/javascript/**/*'
 
-SpecParity/NoLetBang:
+RSpecParity/NoLetBang:
   Description: 'Disallows the use of `let!` in specs.'
   Enabled: true
   Include:

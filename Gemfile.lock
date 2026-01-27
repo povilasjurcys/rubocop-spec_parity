@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rubocop-spec_parity (0.1.0)
+    rubocop-rspec_parity (0.1.0)
       lint_roller (~> 1.1)
       rubocop (>= 1.72.0)
 
@@ -84,7 +84,7 @@ DEPENDENCIES
   rake (~> 13.0)
   rspec (~> 3.0)
   rubocop (~> 1.21)
-  rubocop-spec_parity!
+  rubocop-rspec_parity!
 
 BUNDLED WITH
    2.7.2

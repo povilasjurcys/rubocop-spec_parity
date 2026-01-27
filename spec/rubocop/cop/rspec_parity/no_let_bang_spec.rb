@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe RuboCop::Cop::SpecParity::NoLetBang do
+RSpec.describe RuboCop::Cop::RSpecParity::NoLetBang do
   subject(:cop) { described_class.new }
 
   let(:msg) { "Do not use `let!`. Use `let` with explicit reference or `before` block instead." }
@@ -9,21 +9,21 @@ RSpec.describe RuboCop::Cop::SpecParity::NoLetBang do
     it "registers an offense when using let!" do
       expect_offense(<<~RUBY)
         let!(:user) { create(:user) }
-        ^^^^^^^^^^^ SpecParity/NoLetBang: #{msg}
+        ^^^^^^^^^^^ RSpecParity/NoLetBang: #{msg}
       RUBY
     end
 
     it "registers an offense when using let! with a symbol" do
       expect_offense(<<~RUBY)
         let!(:post) { Post.new }
-        ^^^^^^^^^^^ SpecParity/NoLetBang: #{msg}
+        ^^^^^^^^^^^ RSpecParity/NoLetBang: #{msg}
       RUBY
     end
 
     it "registers an offense when using let! with a string" do
       expect_offense(<<~RUBY)
         let!("user") { User.new }
-        ^^^^^^^^^^^^ SpecParity/NoLetBang: #{msg}
+        ^^^^^^^^^^^^ RSpecParity/NoLetBang: #{msg}
       RUBY
     end
 
@@ -31,7 +31,7 @@ RSpec.describe RuboCop::Cop::SpecParity::NoLetBang do
       expect_offense(<<~RUBY)
         describe User do
           let!(:user) { create(:user) }
-          ^^^^^^^^^^^ SpecParity/NoLetBang: #{msg}
+          ^^^^^^^^^^^ RSpecParity/NoLetBang: #{msg}
         end
       RUBY
     end
@@ -40,7 +40,7 @@ RSpec.describe RuboCop::Cop::SpecParity::NoLetBang do
       expect_offense(<<~RUBY)
         context "when logged in" do
           let!(:session) { create(:session) }
-          ^^^^^^^^^^^^^^ SpecParity/NoLetBang: #{msg}
+          ^^^^^^^^^^^^^^ RSpecParity/NoLetBang: #{msg}
         end
       RUBY
     end
@@ -50,7 +50,7 @@ RSpec.describe RuboCop::Cop::SpecParity::NoLetBang do
         describe User do
           context "with posts" do
             let!(:post) { create(:post) }
-            ^^^^^^^^^^^ SpecParity/NoLetBang: #{msg}
+            ^^^^^^^^^^^ RSpecParity/NoLetBang: #{msg}
           end
         end
       RUBY
@@ -60,9 +60,9 @@ RSpec.describe RuboCop::Cop::SpecParity::NoLetBang do
       expect_offense(<<~RUBY)
         describe User do
           let!(:user) { create(:user) }
-          ^^^^^^^^^^^ SpecParity/NoLetBang: #{msg}
+          ^^^^^^^^^^^ RSpecParity/NoLetBang: #{msg}
           let!(:post) { create(:post) }
-          ^^^^^^^^^^^ SpecParity/NoLetBang: #{msg}
+          ^^^^^^^^^^^ RSpecParity/NoLetBang: #{msg}
         end
       RUBY
     end
@@ -70,7 +70,7 @@ RSpec.describe RuboCop::Cop::SpecParity::NoLetBang do
     it "registers an offense for let! with complex block" do
       expect_offense(<<~RUBY)
         let!(:user) do
-        ^^^^^^^^^^^ SpecParity/NoLetBang: #{msg}
+        ^^^^^^^^^^^ RSpecParity/NoLetBang: #{msg}
           User.create(
             name: "Test",
             email: "test@example.com"
@@ -83,7 +83,7 @@ RSpec.describe RuboCop::Cop::SpecParity::NoLetBang do
       expect_offense(<<~RUBY)
         shared_examples "user examples" do
           let!(:user) { create(:user) }
-          ^^^^^^^^^^^ SpecParity/NoLetBang: #{msg}
+          ^^^^^^^^^^^ RSpecParity/NoLetBang: #{msg}
         end
       RUBY
     end
@@ -92,7 +92,7 @@ RSpec.describe RuboCop::Cop::SpecParity::NoLetBang do
       expect_offense(<<~RUBY)
         shared_context "with user" do
           let!(:user) { create(:user) }
-          ^^^^^^^^^^^ SpecParity/NoLetBang: #{msg}
+          ^^^^^^^^^^^ RSpecParity/NoLetBang: #{msg}
         end
       RUBY
     end
