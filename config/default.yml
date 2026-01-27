@@ -30,9 +30,3 @@ RSpecParity/SufficientContexts:
     - 'app/assets/**/*'
     - 'app/views/**/*'
     - 'app/javascript/**/*'
-
-RSpecParity/NoLetBang:
-  Description: 'Disallows the use of `let!` in specs.'
-  Enabled: true
-  Include:
-    - 'spec/**/*_spec.rb'

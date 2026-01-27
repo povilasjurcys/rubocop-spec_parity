@@ -6,7 +6,7 @@ RSpec.describe RuboCop::RSpecParity do
   end
 
   it "loads the cops" do
-    expect(RuboCop::Cop::RSpecParity::NoLetBang).to be_a(Class)
     expect(RuboCop::Cop::RSpecParity::PublicMethodHasSpec).to be_a(Class)
+    expect(RuboCop::Cop::RSpecParity::SufficientContexts).to be_a(Class)
   end
 end

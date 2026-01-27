@@ -9,7 +9,6 @@ This plugin provides these custom cops:
 - **RSpecParity/FileHasSpec**: Ensures every Ruby file in your app directory has a corresponding spec file
 - **RSpecParity/PublicMethodHasSpec**: Ensures every public method has spec test coverage
 - **RSpecParity/SufficientContexts**: Ensures specs have at least as many contexts as the method has branches (if/elsif/else, case/when, &&, ||, ternary operators)
-- **RSpecParity/NoLetBang**: Disallows the use of `let!` in specs, encouraging explicit setup
 
 ## Examples
 
@@ -112,43 +111,6 @@ end
 
 - `IgnoreMemoization` (default: `true`) - When enabled, common memoization patterns like `@var ||=` and `return @var if defined?(@var)` are not counted as branches. Set to `false` if you want to count these as branches.
 
-### RSpecParity/NoLetBang
-
-Disallows the use of `let!` in specs, encouraging explicit setup.
-
-```ruby
-# bad
-RSpec.describe User do
-  let!(:user) { create(:user) }
-
-  it 'does something' do
-    expect(user).to be_valid
-  end
-end
-
-# good - use let with explicit reference
-RSpec.describe User do
-  let(:user) { create(:user) }
-
-  it 'does something' do
-    expect(user).to be_valid  # Explicit reference
-  end
-end
-
-# good - use before block when setup is needed
-RSpec.describe User do
-  let(:user) { build(:user) }
-
-  before do
-    user.save!  # Explicit setup in before block
-  end
-
-  it 'does something' do
-    expect(user).to be_persisted
-  end
-end
-```
-
 ## Assumptions
 
 These cops work based on the following conventions:
@@ -218,11 +180,6 @@ RSpecParity/SufficientContexts:
   Exclude:
     - 'app/assets/**/*'
     - 'app/views/**/*'
-
-RSpecParity/NoLetBang:
-  Enabled: true
-  Include:
-    - 'spec/**/*_spec.rb'
 ```
 
 Run RuboCop as usual:

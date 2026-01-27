@@ -14,6 +14,33 @@
    - All RuboCop violations are resolved
    - All RSpec tests pass
    - No new warnings or errors are introduced
+   - CHANGELOG.md has been updated if applicable (see below)
+
+## Changelog Management
+
+**Update CHANGELOG.md ONLY for:**
+- New features (Added)
+- Bug fixes (Fixed)
+- Deprecations (Deprecated)
+- Removed features (Removed)
+- Dependency updates (Updated)
+
+**DO NOT update for:**
+- Refactoring or code quality improvements
+- Minor documentation updates
+- Internal implementation changes
+
+**Format (compact, one line per change):**
+```
+Added: Allow passing custom decorator build strategy
+Fixed: Better handle render in controller hooks
+Updated: GraphQL and gems version dependencies
+Removed: NoLetBang cop
+```
+
+**During Release:**
+- Move items from `[Unreleased]` to: `## [X.Y.Z] - YYYY-MM-DD`
+- Leave `[Unreleased]` empty
 
 ## Git Commits
 
